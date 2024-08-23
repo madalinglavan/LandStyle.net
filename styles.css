@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Definire variabile CSS pentru culori și tranziții */
+:root {
+    --bg-color: #f5f5f5; /* Crem deschis pentru fundal */
+    --text-color: #333; /* Gri închis pentru text */
+    --hover-bg-color: #f5a623; /* Corai deschis pentru hover */
+    --hamburger-color: #d4af37; /* Aurie pal pentru meniul hamburger */
+    --transition-speed: 0.3s;
+}
+
+/* Resetare stiluri implicite */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Stiluri pentru header și navigare */
+header {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adaugă o umbră subtilă */
+    z-index: 1000; /* Asigură că header-ul este deasupra altor elemente */
+}
+
+/* Stiluri pentru navigare */
+nav {
+    display: flex;
+    justify-content: space-between; /* Asigură că meniul hamburger este aliniat la dreapta */
+    align-items: center;
+}
+
+/* Stiluri pentru meniul hamburger */
+.hamburger-menu {
+    display: flex;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 4px;
+    transition: transform var(--transition-speed) ease-in-out;
+   
+}
+
+/* Stiluri pentru span-urile hamburger menu */
+.hamburger-menu h1 {
+    display: flex;
+    width: fit-content;
+    background-color: var(--hamburger-color);
+    transition: transform var(--transition-speed) ease-in-out, opacity var(--transition-speed) ease-in-out;
+    z-index: 1010; /* Asigură că meniul hamburger este deasupra meniului lateral */
+}
+
+/* Stiluri pentru meniul de navigare */
+.nav-list {
+    display: flex;
+    gap: 20px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative; /* Necesare pentru pseudo-elementul sublinierii */
+}
+.nav-list li {
+    position: relative;
+    border-bottom: 1px solid #ddd; /* Linie de separare între elementele de meniu */
+}
+
+.nav-list a {
+    display: block;
+    padding: 15px 20px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    text-align: left;
+    transition: background-color var(--transition-speed) ease-in-out, color var(--transition-speed) ease-in-out;
+}
+
+/* Stiluri pentru linkuri */
+.nav-list a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--hover-bg-color);
+    transition: width var(--transition-speed) ease-in-out;
+}
+
+.nav-list a:hover::after {
+    width: 100%; /* Animația pentru subliniere pe hover */
+}
+
+.nav-list a:hover,
+.nav-list a:focus {
+    background-color: var(--hover-bg-color);
+    color: white; /* Schimbă culoarea textului la hover */
+}
+
+/* Stiluri pentru meniul lateral pe ecrane mari */
+@media (min-width: 769px) {
+    .nav-list {
+        position: fixed; /* Fixează meniul pe ecran */
+        top: 100px;
+        left: -250px; /* Ascunde meniul complet în stânga */
+        width: 250px; /* Lățimea meniului lateral */
+        height: fit-content; /* Înălțimea completă a vizualizării */
+        background-color: var(--bg-color);
+        flex-direction: column;
+        transition: left var(--transition-speed) ease-in-out;
+        z-index: 1000; /* Asigură că meniul este deasupra altor elemente */
+        padding-top: 60px; /* Spațiu pentru a nu ascunde textul sub header */
+    }
+
+    .nav-list.active {
+        left: 0; /* Afișează meniul lateral */
+    }
+
+    .nav-list li {
+        width: 100%;
+        border-bottom: 1px solid #ddd; /* Linie de separare între elementele de meniu */
+    }
+
+    .nav-list a {
+        display: block;
+        padding: 15px 20px;
+        color: var(--text-color);
+        text-decoration: none;
+        font-weight: 500;
+        text-align: left;
+        transition: background-color var(--transition-speed) ease-in-out, color var(--transition-speed) ease-in-out;
+    }
+
+    .nav-list a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--hover-bg-color);
+        transition: width var(--transition-speed) ease-in-out;
+    }
+
+    .nav-list a:hover::after {
+        width: 100%; /* Animația pentru subliniere pe hover */
+    }
+
+    .nav-list a:hover,
+    .nav-list a:focus {
+        background-color: var(--hover-bg-color);
+        color: white; /* Schimbă culoarea textului la hover */
+    }
+}
+
+/* Animația de apariție a meniului pentru ecrane mici */
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Animația de dispariție a meniului pentru ecrane mici */
+@keyframes slideOut {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-100%);
+    }
+}
+
+
+
+/* Stiluri pentru secțiunile de conținut */
+.content-section {
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform var(--transition-speed) ease-in-out;
+    z-index: 999; /* Asigură că secțiunile sunt deasupra altor elemente */
+}
+
+/* Stiluri pentru secțiunea activă */
+.content-section.active {
+    transform: translateX(-100%); /* Mută secțiunea în afara ecranului spre stânga */
+}
+
+/* Animația pentru secțiunile de conținut */
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutToRight {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* Stiluri pentru secțiuni active */
+.content-section.active {
+    animation: slideInFromRight 1.5s ease-in-out;
+}
+
+.content-section.inactive {
+    animation: slideOutToRight 0.5s ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Stiluri pentru meniul mobil */
+@media (max-width: 768px) {
+    .nav-list {
+        display: none;
+        position: absolute;
+        top: 100px; /* Poziționare sub header */
+        left: 0;
+        right: 0;
+        background-color: var(--bg-color);
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+        overflow: hidden; /* Ascunde conținutul care depășește aria meniului */
+        animation: slideOut 0.5s ease-in-out; /* Ajustare animație */
+        z-index: 1000; /* Asigură că meniul de navigare este deasupra altor elemente */
+    }
+
+    .nav-list.active {
+        display: flex;
+        animation: slideIn 0.5s ease-in-out; /* Ajustare animație */
+    }
+
+    .nav-list li {
+        width: 100%;
+        border-bottom: 1px solid #ddd; /* Linie de separare între elementele de meniu */
+    }
+
+    .nav-list a {
+        display: block;
+        padding: 15px;
+        color: var(--text-color);
+        text-decoration: none;
+        font-weight: 500;
+        text-align: center; /* Aliniază textul la centru */
+        position: relative; /* Necesare pentru pseudo-elementul sublinierii */
+        transition: background-color var(--transition-speed) ease-in-out, color var(--transition-speed) ease-in-out;
+    }
+
+    .nav-list a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--hover-bg-color);
+        transition: width var(--transition-speed) ease-in-out;
+    }
+
+    .nav-list a:hover::after {
+        width: 100%; /* Animația pentru subliniere pe hover */
+    }
+
+    .nav-list a:hover,
+    .nav-list a:focus {
+        background-color: var(--hover-bg-color);
+        color: white; /* Schimbă culoarea textului la hover */
+    }
+
+    .hamburger-menu {
+        display: flex; /* Afișează meniul hamburger pe ecrane mici */
+    }
+}
