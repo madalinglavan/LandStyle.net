@@ -177,19 +177,26 @@ nav {
 
 /* Stiluri pentru secțiunile de conținut */
 .content-section {
-    position: absolute;
-    top: 0;
-    right: -100%;
+    position: fixed; /* Asigură-te că secțiunile rămân fixate pe ecran */
+    top: 60px;
+    right: -100%; /* Ascunde secțiunea complet în afara ecranului */
     width: 100%;
-    height: 100vh;
+    height: 100vh; /* Asigură-te că secțiunea ocupă întreaga înălțime a ecranului */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Ascunde conținutul care depășește limitele secțiunii */
     transition: transform var(--transition-speed) ease-in-out;
-    z-index: 999; /* Asigură că secțiunile sunt deasupra altor elemente */
+    z-index: 999; /* Asigură-te că secțiunile sunt deasupra altor elemente */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ddd;
 }
 
 /* Stiluri pentru secțiunea activă */
 .content-section.active {
-    transform: translateX(-100%); /* Mută secțiunea în afara ecranului spre stânga */
+    transform: translateX(0); /* Asigură-te că secțiunea activă ocupă întregul spațiu */
+    right: 0; /* Aliniază secțiunea activă la dreapta ecranului */
+    left: 0; /* Aliniază secțiunea activă la stânga ecranului */
 }
 
 /* Animația pentru secțiunile de conținut */
@@ -213,6 +220,16 @@ nav {
 
 /* Stiluri pentru secțiuni active */
 .content-section.active {
+    animation: slideInFromRight 0.5s ease-in-out;
+}
+
+.content-section.inactive {
+    animation: slideOutToRight 0.5s ease-in-out;
+}
+
+
+/* Stiluri pentru secțiuni active */
+.content-section.active {
     animation: slideInFromRight 1.5s ease-in-out;
 }
 
@@ -221,11 +238,43 @@ nav {
 }
 
 
+.product-container{
+    width: 99%;
+    background-color: #d4af37;
+    height: 100%;
+    overflow-x: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+    
+}
+.product{
+    width: 24%;
+    height: 300px;
+    background-color: #333;
+    text-align: center;
+    border: 2px solid #fff;
+    margin: 0 auto;
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
+.product img{
+    width: 50%;
+    height: 50%;
+}
+button{
+    margin-top: 20px;
+}
 
 
 
-
-
+footer{
+    
+}
 
 
 
@@ -352,5 +401,9 @@ nav {
 
     .hamburger-menu {
         display: flex; /* Afișează meniul hamburger pe ecrane mici */
+    }
+    .product{
+        width: 48%;
+        height: 50%;
     }
 }
